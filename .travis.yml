@@ -9,5 +9,5 @@ before_install:
 - chmod 600 ~/.ssh/id_rsa
 - echo -e "Host 101.132.155.26\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 after_success:
-- ssh root@101.132.155.26 'mkdir -p ~/a'
-- ls
+- tar -jcf test.tar.bz2 *
+- scp test.tar.bz2 root@101.132.155.26:~/
