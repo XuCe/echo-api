@@ -9,7 +9,7 @@ before_install:
 - chmod 600 ~/.ssh/id_rsa
 - echo -e "Host 101.132.155.26\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 after_success:
-- ssh root@101.132.155.26 'netstat -nlp |grep :8080 |grep -v grep|awk "{print $7}" |awk -F "/" "{print $1}" |xargs kill -9'
+- ssh root@101.132.155.26 'netstat -nlp |grep :8080 |grep -v grep|awk {print $7} |awk -F / {print $1} |xargs kill -9'
 - ssh root@101.132.155.26 'rm -rf /var/java/echo/*'
 - scp build/libs/*.jar root@101.132.155.26:/var/java/echo/
 - ssh root@101.132.155.26 'nohup java -jar /var/java/echo/*.jar 2>&1 &'
