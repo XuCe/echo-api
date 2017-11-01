@@ -7,6 +7,7 @@ script: gradle build --continue
 before_install:
 - openssl aes-256-cbc -K $encrypted_b07074037f75_key -iv $encrypted_b07074037f75_iv -in id_rsa.enc -out ~/.ssh/id_rsa -d
 - chmod 600 ~/.ssh/id_rsa
+- echo -e "Host 101.132.155.26\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 after_success:
 - ssh root@101.132.155.26 'netstat -nlp |grep :8080 |grep -v grep|awk '{print $7}' |awk -F '/' '{print $1}' |xargs kill -9 && rm -rf /var/java/echo/*'
 - scp build/libs/*.jar root@101.132.155.26:/var/java/echo/
